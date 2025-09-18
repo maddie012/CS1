@@ -1,6 +1,8 @@
- #author: Madeleine Elias
+#author: Madeleine Elias
 #date: 9/3/25
 #description: asks for name or word and tests it with functions
+#breaks: if they are any numbers or special characters, if they are less than three words or spaces,the frequency is off if there isn't three names, initials won't work if no middle name,
+#challenges: makes random name from random letters, scrambles both first and full name
 #sources: old codes, w3school
 
 
@@ -14,7 +16,7 @@ def count_vowels(name):
         the number of vowels in the name'''
     count = 0
     for i in name:
-        if i == "a" or i == "e" or i =="i" or i == "o" or i == "u"or i=="y":
+        if i == "a" or i == "e" or i =="i" or i == "o" or i == "u"or i=="y" or i=="A" or i=="E" or i=="I" or i=="O" or i=="U" or i=="Y":
             count = count + 1
         else:
             count = count + 0
@@ -50,10 +52,11 @@ def count_consonant(name):
         total = total + 1
     count = 0
     for i in name:
-        if i == "q" or i =="w" or i =="r" or i=="t" or i=="p"or i=="s"or i=="d"or i=="f"or i=="g"or i=="h"or i=="j"or i=="k"or i=="l"or i=="z" or i=="x" or i=="c" or i=="v" or i=="b" or i=="n" or i=="m":
+        if i == "q" or i =="w" or i =="r" or i=="t" or i=="p"or i=="s"or i=="d"or i=="f"or i=="g"or i=="h"or i=="j"or i=="k"or i=="l"or i=="z" or i=="x" or i=="c" or i=="v" or i=="b" or i=="n" or i=="m" or i=="Q" or i=="W" or i=="R" or i=="T" or i=="P" or i=="S" or i=="D" or i=="F" or i=="G" or i=="H" or i=="J" or i=="K" or i=="L" or i=="Z" or i=="X" or i=="C" or i=="V" or i=="B" or i=="N" or i=="M":
             count = count +1
         else:
             count = count + 0
+    total = total - 2
     frequency = count/total
     return frequency
 
@@ -189,63 +192,103 @@ def upper(name):
             namout = namout+letter
     return namout
 
+def title(name1):
+    '''
+    function finds out if the first name is a title and returns a boolean if it is true or false
+    Args:
+        name1: the full name of the user after it goes through the function first_name
+    returns:
+        true or false depending on if there is a title'''
+    if name1 == "Dr." or name1=="Sir" or name1=="Esq" or name1=="Ph.d" or name1=="Professor" or name1=="Captain" or name1=="Ms" or name1=="Mrs" or name1=="Mr":
+        return True
+    else:
+        return False
+
+def mix_name(namef):
+    '''
+    function gets the first name from the function and scrambles it by making it into a list and picking random indexs to put into empty string
+    Args:
+        namef: the first name of the user after it goes through the function first name
+    returns:
+        a mix of the first name of the user'''
+    mix = ""
+    name1 = list(namef)
+    while len(name1) > 0:
+        find = random.choice(name1)
+        mix += find
+        name1.remove(find)
+    return mix
+
+def full_scramble(name):
+    scramble = ""
+    namel = list(name)
+    while len(namel) > 0:
+        find = random.choice(namel)
+        scramble += find
+        namel.remove(find)
+    return scramble
+
+
+
 def main():
     name = input("enter your fullname ")
     name1 = first_name(name)
     name2 = middle_name(name)
     name3 = last_name(name)
+    while True:
+        print("what do you want to do?")
+        question = input("vowels/reverse/consonants/random/first name/middle name/last name/uppercase/lowercase/initials/palindrome/hyphen/title/mix/scramble ")
 
-    print("number of vowels:")
-    print(count_vowels(name))
-
-    print("reverse:")
-    print(reverse_display(name))
-
-    print("frequency of consonants:")
-    print(count_consonant(name))
-
-    print("random name:")
-    print(random_name())
-
-    print("first name:")
-    print(first_name(name))
-
-    print("middle name:")
-    print(middle_name(name))
-
-    print("last name:")
-    print(last_name(name))
-
-    print("uppercase:")
-    print(upper(name))
-
-    print("lowercase:")
-    print(lower(name))
-
-    print("initials:")
-    print(initials(name1,name2,name3))
-
-    print("is it a palindrome")
-    palindrome(name1)
-
-    print("does it contain hyphen")
-    print(hyphen(name3))
-
+        if question =="vowels":
+            print("number of vowels:")
+            print(count_vowels(name))
+        elif question =="reverse":
+            print("reverse:")
+            print(reverse_display(name))
+        elif question == "consonants":
+            print("frequency of consonants:")
+            print(count_consonant(name))
+        elif question == "random":
+            print("random name:")
+            print(random_name())
+        elif question == "first name":
+            print("first name:")
+            print(first_name(name))
+        elif question == "middle name":
+            print("middle name:")
+            print(middle_name(name))
+        elif question == "last name":
+            print("last name:")
+            print(last_name(name))
+        elif question == "uppercase":
+            print("uppercase:")
+            print(upper(name))
+        elif question == "lowercase":
+            print("lowercase:")
+            print(lower(name))
+        elif question == "initials":
+            print("initials:")
+            print(initials(name1,name2,name3))
+        elif question == "palindrome":
+            print("is it a palindrome")
+            palindrome(name1)
+        elif question == "hyphen":
+            print("does it contain hyphen")
+            print(hyphen(name3))
+        elif question == "title":
+            print("does it contain a title")
+            print(title(name1))
+        elif question == "mix":
+            print("mix of first name")
+            print(mix_name(name1))
+        elif question == "scramble":
+            print("scramble of full name")
+            print(full_scramble(name))
+        else:
+            print("choose an option ")
+    
 main()
+     
 
+   
 
-'''
-Total functions:
-    count_vowels
-    reverse_display
-    palindrome
-    count_consonant
-    first_name
-    last_name
-    middle_name
-    hyphen
-    random_name
-    initials
-    lower
-    upper
-'''
